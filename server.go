@@ -12,8 +12,14 @@ func StarServer() {
 }
 
 func produtosHandler(w http.ResponseWriter, r *http.Request) {
-	produtos := catalogo()
+	queryParam := r.URL.Query().Get("nome")
 
-	json.NewEncoder(w).Encode(produtos)
+	if queryParam != "" {
+		prodBusca := buscaPorNome(queryParam)
+		json.NewEncoder(w).Encode(prodBusca)
+	} else {
+		produtos := catalogo()
+		json.NewEncoder(w).Encode(produtos)
+	}
 
 }
