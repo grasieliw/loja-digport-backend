@@ -1,11 +1,11 @@
 package model
 
 type Produto struct {
-	Nome       string
-	Descricao  string
-	Categoria  string
-	Id         string
-	Valor      float32
-	Quantidade int
-	Imagem     string
+	Nome       string  `json:"nome"`
+	Descricao  string  `json:"descricao"`
+	Categoria  string  `json:"categoria"`
+	Id         string  `json:"id"`
+	Valor      float32 `json:"valor"`
+	Quantidade int     `json:"quantidade"`
+	Imagem     string  `json:"imagem"`
 }

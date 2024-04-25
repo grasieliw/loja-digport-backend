@@ -1,7 +1,7 @@
 package model
 
 type listaDesejos struct {
-	ID        string
-	ProdutoID []string
-	UserID    string
+	ID        string   `json:"id"`
+	ProdutoID []string `json:"produtoid"`
+	UserID    string   `json:"userid"`
 }

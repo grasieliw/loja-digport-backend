@@ -1,8 +1,12 @@
 package main
 
 import (
+	"errors"
+
 	"github.com/grasieliw/loja-digport-backend/blob/main/main.go/model"
 )
+
+var catalogoVazio []model.Produto = []model.Produto{}
 
 func catalogo() []model.Produto {
 
@@ -52,4 +56,17 @@ func buscaPorNome(nome string) []model.Produto {
 	}
 	return produtoEscolhidoNome
 
+}
+
+func registrarProdutos(novoProduto model.Produto) error {
+
+	for _, produtoDaLista := range catalogoVazio {
+
+		if novoProduto.Id == produtoDaLista.Id {
+
+			return errors.New("produto ja cadastrado")
+		}
+	}
+	catalogoVazio = append(catalogoVazio, novoProduto)
+	return nil
 }

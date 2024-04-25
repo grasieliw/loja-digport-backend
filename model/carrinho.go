@@ -1,10 +1,10 @@
 package model
 
 type Carrinho struct {
-	ID            string
-	UserID        string
-	InfosProdutos []InfosProdutos
-	ValorTotal    float32
+	ID            string          `json:"id"`
+	UserID        string          `json:"userid"`
+	InfosProdutos []InfosProdutos `json:"infosprodutos"`
+	ValorTotal    float32         `json:"valortotal"`
 }
 
 type InfosProdutos struct {
