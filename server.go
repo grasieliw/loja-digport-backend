@@ -41,13 +41,12 @@ func addProdutos(w http.ResponseWriter, r *http.Request) {
 
 	registrarProdutos(produto)
 
-	w.WriteHeader(http.StatusCreated)
-
 	jsonData, err := json.Marshal(produto)
 
 	if err != nil {
-		http.Error(w, "internal Server Error", http.StatusInternalServerError)
+		http.Error(w, "Bad Request", http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
+		return
 	}
-
 	w.Write(jsonData)
 }
