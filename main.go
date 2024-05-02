@@ -1,10 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	_ "github.com/lib/pq"
+)
 
 func main() {
-	StarServer()
-	produtosFiltrados := buscaPorNome("Agua")
-	fmt.Println(produtosFiltrados)
+	//StarServer()
+
+	fmt.Println("Bem Vindo(a) à loja DigPort")
 
 }
