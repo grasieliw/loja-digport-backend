@@ -9,11 +9,14 @@ import (
 func Cpf() {
 
 	var texto string
-	var isValidCpf bool
-	isValidCpf = brdoc.IsCPF(texto)
 
-	//caso sim
-	fmt.Printf("%s é um CPF", texto)
-	//caso nao
-	fmt.Printf("%s nao é um CPF", texto)
+	fmt.Print("Informe um CPF para verificar se está na lista: ")
+	fmt.Scan(&texto)
+
+	if brdoc.IsCPF(texto) {
+		fmt.Printf("%s é um CPF", texto)
+
+	} else {
+		fmt.Printf("%s nao é um CPF", texto)
+	}
 }
