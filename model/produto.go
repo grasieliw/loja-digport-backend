@@ -2,6 +2,7 @@ package model
 
 import (
 	"database/sql"
+	"fmt"
 
 	"github.com/grasieliw/loja-digport-backend/db"
 )
@@ -54,26 +55,26 @@ func BuscaProdutos() []Produto {
 	return produtos
 }
 
-func BuscaPorNome(){
+func BuscaPorNome(nomeProduto string) Produto {
 	db := db.ConectaBancoDados()
 
 	res := db.QueryRow("SELECT * FROM produtos where nome = $1", nomeProduto)
 
 	err := res.Scan(&id, &nome, &preco, &descricao, &imagem, &quantidade)
-	 if err = sql.ErrNoRows{
-		fmt.Printf("Produto noa encontrado %s\n", nome)
-	
-	 } else {
-		panic(err.Error())
-	 }
+	if err == sql.ErrNoRows {
+		fmt.Printf("Produto nao encontrado %s\n", nome)
 
-	 var produto1 Produto
-	 p.ID = id
-	p.Nome = nome
-	p.Descricao = descricao
-	p.Preco = preco
-	p.Imagem = imagem
-	p.QuantidadeEmEstoque = quantidade
+	} else {
+		panic(err.Error())
+	}
+
+	var produto1 Produto
+	produto1.ID = id
+	produto1.Nome = nome
+	produto1.Descricao = descricao
+	produto1.Preco = preco
+	produto1.Imagem = imagem
+	produto1.QuantidadeEmEstoque = quantidade
 
 	defer db.Close()
 	return produto1

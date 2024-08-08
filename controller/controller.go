@@ -13,6 +13,9 @@ func BuscaProdutosHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func BuscaProdutosPorNomeHandler(w http.ResponseWriter, r *http.Request) {
+	nome := r.URL.Query().Get("nome")
+	produto := model.BuscaPorNome(nome)
+	json.NewEncoder(w).Encode(produto)
 
 }
 
