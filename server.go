@@ -1,8 +1,6 @@
 package main
 
-import (
-	"github.com/grasieliw/loja-digport-backend/blob/routes"
-)
+import "github.com/grasieliw/loja-digport-backend/routes"
 
 func StarServer() {
 
