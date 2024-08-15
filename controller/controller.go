@@ -20,10 +20,16 @@ func BuscaProdutosPorNomeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func CriaProdutosHandler(w http.ResponseWriter, r *http.Request) {
+	var produto model.Produto
+	json.NewDecoder(r.Body).Decode(&produto)
 
-}
+	error := model.CriaProduto(produto)
 
-func AdicionaProdutoHandler(w http.ResponseWriter, r *http.Request) {
+	if error != nil {
+		w.WriteHeader(http.StatusBadRequest)
+	}
+
+	w.WriteHeader(http.StatusCreated)
 }
 
 func RemoveProdutoHandler(w http.ResponseWriter, r *http.Request) {
