@@ -3,6 +3,7 @@ package model
 import (
 	"database/sql"
 	"fmt"
+	"strconv"
 
 	"github.com/grasieliw/loja-digport-backend/db"
 )
@@ -78,5 +79,50 @@ func BuscaPorNome(nomeProduto string) Produto {
 
 	defer db.Close()
 	return produto1
+
+}
+
+func CriaProduto(prod Produto) error {
+
+	if produtoCadastrado(prod.Nome) {
+
+		fmt.Printf("Produto já cadastrado: %s\n", nome)
+		return fmt.Errorf("Produto ja cadastrado")
+	}
+
+	db := db.ConectaBancoDados()
+	id := uuid.NewString()
+	nome := prod.Nome
+	preco := preco.Preco
+	descricao := prod.Descricao
+	imagem := prod.Imagem
+	quantidade := prod.QuantidadeEmEstoque
+
+	strInsert := "INSERT INTO produtos VALUES($1, $2, $3, $4, $5, $6)"
+
+	result, err := db.Exec(strInsert, id, nome, strconv.FormatFloat(preco, 'f', 1, 64), descricao, imagem, strconv.Itoa(quantidade))
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	rowsAffected, err := result.RowsAffected()
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	fmt.Printf("Produto %s criado com sucesso (%d row affected)\n", id, rowsAffected)
+
+	defer db.Close()
+
+	return nil
+}
+
+func produtoCadastrado(nomeProduto string) bool {
+
+	prod := BuscaPorNome(nomeProduto)
+
+	return prod.Nome == nomeProduto
 
 }

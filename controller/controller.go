@@ -22,3 +22,9 @@ func BuscaProdutosPorNomeHandler(w http.ResponseWriter, r *http.Request) {
 func CriaProdutosHandler(w http.ResponseWriter, r *http.Request) {
 
 }
+
+func AdicionaProdutoHandler(w http.ResponseWriter, r *http.Request) {
+}
+
+func RemoveProdutoHandler(w http.ResponseWriter, r *http.Request) {
+}
