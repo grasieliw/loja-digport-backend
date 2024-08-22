@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/google/uuid"
 	"github.com/grasieliw/loja-digport-backend/db"
 )
 
@@ -93,7 +94,7 @@ func CriaProduto(prod Produto) error {
 	db := db.ConectaBancoDados()
 	id := uuid.NewString()
 	nome := prod.Nome
-	preco := preco.Preco
+	preco := prod.Preco
 	descricao := prod.Descricao
 	imagem := prod.Imagem
 	quantidade := prod.QuantidadeEmEstoque
