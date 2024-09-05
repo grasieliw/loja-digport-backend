@@ -127,3 +127,26 @@ func produtoCadastrado(nomeProduto string) bool {
 	return prod.Nome == nomeProduto
 
 }
+
+func RemoveProduto(id string) error {
+	db := db.ConectaBancoDados()
+	defer db.Close()
+
+	//DELETE FROM [nome da tabela] WHERE [nome do campo] = [valor]
+	resultado, err := db.Exec("DELETE FROM PRODUTOS WHERE id = $1", id)
+	if err != nil {
+		fmt.Println("erro ao tentar excluir produto")
+		return fmt.Errorf("ocorreu um erro ao tentar excluir produto: %w", err)
+	}
+
+	linesAffected, err := resultado.RowsAffected()
+	if err != nil {
+		return err
+	}
+	fmt.Printf("%d linhas afetadas", linesAffected)
+
+	fmt.Println("produto excluido")
+
+	return nil
+
+}
