@@ -18,6 +18,8 @@ func HandleRequests() {
 
 	route.HandleFunc("/produtos/{id}", controller.RemoveProdutoHandler).Methods("DELETE")
 
+	route.HandleFunc("/usuarios", controller.CriaUsuariosHandler).Methods("POST")
+
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
 		AllowedMethods:   []string{"GET", "POST", "DELETE", "PUT"},
